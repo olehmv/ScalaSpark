@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaProjectSettings">
+    <option name="intInjectionMapping">
+      <map>
+        <entry key="xml" value="XML" />
+      </map>
+    </option>
+    <option name="outputLimit" value="1000" />
+    <option name="showArgumentsToByNameParams" value="true" />
+    <option name="useEclipseCompatibility" value="true" />
+  </component>
+</project>
