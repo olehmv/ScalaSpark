@@ -7,6 +7,7 @@ object FootDriver {
     val conf = new SparkConf().setMaster("local[*]").setAppName("Foot Driver")
     val sc = new SparkContext(conf)
     //    val champ = sc.textFile("champions.csv")
+
     //    val data = sc.textFile("epldata_final.csv")
     val champ = sc.textFile(args(0))
     val data = sc.textFile(args(1))

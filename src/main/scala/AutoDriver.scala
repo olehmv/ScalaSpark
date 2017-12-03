@@ -1,6 +1,7 @@
 // Import Spark SQL
 import org.apache.spark.sql.SparkSession
-
+import org.apache.spark.sql.types.{DataTypes, TimestampType}
+//https://www.jetbrains.com/help/idea/eclipse.html
 object AutoDriver {
 
   def main(args: Array[String]): Unit = {
@@ -8,14 +9,14 @@ object AutoDriver {
     import hiveSql.implicits._
     import org.apache.spark.sql.types.{DateType, DoubleType, StringType, StructField, StructType}
     val aschema = StructType(Array(
-      StructField("dateCrawled", DateType),
+      StructField("dateCrawled", DataTypes.TimestampType),
       StructField("name", StringType),
       StructField("seller", StringType),
       StructField("offerType", StringType),
       StructField("price", DoubleType),
       StructField("abtest",StringType),
       StructField("vehicleType",StringType),
-      StructField("yearOfRegistration",StringType),
+      StructField("yearOfRegistration",DoubleType),
       StructField("gearbox",StringType),
       StructField("powerPS",DoubleType),
       StructField("model",StringType),
@@ -24,10 +25,10 @@ object AutoDriver {
       StructField("fuelType",StringType),
       StructField("brand",StringType),
       StructField("notRepairedDamage",StringType),
-      StructField("dateCreated",DateType),
+      StructField("dateCreated",DataTypes.TimestampType),
       StructField("nrOfPictures",DoubleType),
       StructField("postalCode",DoubleType),
-      StructField("lastSeen",DateType)
+      StructField("lastSeen",DataTypes.TimestampType)
 
     ))
 
