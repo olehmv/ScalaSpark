@@ -6,6 +6,8 @@ scalaVersion := "2.11.0"
 
 resolvers += "Hortonworks Repository" at "http://repo.hortonworks.com/content/repositories/releases/"
 
+
+
 libraryDependencies +="org.apache.spark" % "spark-core_2.11" % "2.2.0"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-hive
 libraryDependencies += "org.apache.spark" % "spark-hive_2.11" % "2.2.0"
