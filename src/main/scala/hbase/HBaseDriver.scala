@@ -1,5 +1,6 @@
 package hbase
 
+import org.apache.hadoop.hbase.HConstants
 import org.apache.spark.sql.execution.datasources.hbase.HBaseTableCatalog
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.{DataFrame, Row, SQLContext, SparkSession}
@@ -16,16 +17,16 @@ object HBaseDriver {
       .master("local[2]")
       .getOrCreate().sqlContext
     import sqlContext.implicits._
-//    val data = (0 to 5).map { i =>  HBaseRecord(i, "extra")}
-//
-//    sqlContext.sparkContext.parallelize(data).toDF.write.options(
-//      Map(HBaseTableCatalog.tableCatalog -> catalog, HBaseTableCatalog.newTable -> "5"))
-//      .format("org.apache.spark.sql.execution.datasources.hbase")
-//      .save()
+    val data = (1 to 255).map { i =>  HBaseRecord(i)}
 
-    val dataFrame:DataFrame = withCatalog(catalog,sqlContext)
-    val rows: Array[Row] = dataFrame.take(5)
-    rows.foreach(println)
+    sqlContext.sparkContext.parallelize(data).toDF.write.options(
+      Map(HBaseTableCatalog.tableCatalog -> catalog, HBaseTableCatalog.newTable -> "4",HConstants.ZOOKEEPER_ZNODE_PARENT -> "/hbase-unsecure",HConstants.ZOOKEEPER_QUORUM -> "sandbox-hdp.hortonworks.com",HConstants.ZOOKEEPER_CLIENT_PORT-> "2181"))
+      .format("org.apache.spark.sql.execution.datasources.hbase")
+      .save()
+
+//    val dataFrame:DataFrame = withCatalog(catalog,sqlContext)
+//    val rows: Array[Row] = dataFrame.take(260)
+//    rows.foreach(println)
   }
   def withCatalog(cat: String,sqlContext: SQLContext): DataFrame = {
     sqlContext
@@ -36,7 +37,7 @@ object HBaseDriver {
   }
 
   def catalog = s"""{
-                   |"table":{"namespace":"default", "name":"table1"},
+                   |"table":{"namespace":"default", "name":"table2"},
                    |"rowkey":"key",
                    |"columns":{
                    |"col0":{"cf":"rowkey", "col":"key", "type":"string"},
