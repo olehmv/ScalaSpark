@@ -17,7 +17,7 @@ object HBaseDriver {
       .master("local[2]")
       .getOrCreate().sqlContext
     import sqlContext.implicits._
-    val data = (1 to 255).map { i =>  HBaseRecord(i)}
+    val data = (1 to 254).map { i =>  HBaseRecord(i)}
 
     sqlContext.sparkContext.parallelize(data).toDF.write.options(
       Map(HBaseTableCatalog.tableCatalog -> catalog, HBaseTableCatalog.newTable -> "4",HConstants.ZOOKEEPER_ZNODE_PARENT -> "/hbase-unsecure",HConstants.ZOOKEEPER_QUORUM -> "sandbox-hdp.hortonworks.com",HConstants.ZOOKEEPER_CLIENT_PORT-> "2181"))
